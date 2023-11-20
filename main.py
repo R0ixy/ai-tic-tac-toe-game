@@ -36,7 +36,7 @@ def insert_value(spots: list, index: tuple[int]):
         print('try again\n')
 
 
-def make_move(board):
+def best_move(board):
     best_score = float('-inf')
     move = ()
     for i in range(3):
@@ -55,12 +55,12 @@ def make_move(board):
 def start_game():
     playing = True
     move_result = None
-    make_move(board_array)
+    best_move(board_array)
     while playing:
         draw_board(board_array)
         index = input()
         insert_value(board_array, tuple(int(i) for i in str(index)))
-        make_move(board_array)
+        best_move(board_array)
 
         move_result = check_winner(board_array)
         if move_result is not None:
