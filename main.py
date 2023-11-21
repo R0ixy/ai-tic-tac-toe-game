@@ -7,7 +7,8 @@ from helpers import check_winner
 
 
 def player(board: list):
-    # returns which player to move in state s
+    """Returns which player to move"""
+
     x_number = 0
     o_number = 0
     for row in board:
@@ -17,6 +18,8 @@ def player(board: list):
 
 
 def draw_board(spots):
+    """Draws a board"""
+
     os.system('cls' if os.name == 'nt' else 'clear')
 
     board = f' 1 2 3 \n'
@@ -30,6 +33,8 @@ def draw_board(spots):
 
 
 def insert_value(spots: list, index: tuple[int]):
+    """Inserts a value to the board"""
+
     if spots[index[0] - 1][index[1] - 1] == ' ':
         spots[index[0] - 1][index[1] - 1] = 'X' if player(spots) == 1 else 'O'
     else:

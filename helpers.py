@@ -1,5 +1,6 @@
 def check_winner(board: list[list]):
-    # checks if state s is a terminal state
+    """checks if state s is a terminal state"""
+
     winner = None
 
     # horizontal
@@ -29,4 +30,5 @@ def check_winner(board: list[list]):
 
 
 def equals(a, b, c):
+    """Checks if a, b, c are equal"""
     return a == b and b == c and a != ' '

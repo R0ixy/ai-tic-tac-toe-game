@@ -3,6 +3,8 @@ from helpers import check_winner
 
 
 def best_move(board):
+    """Finds best move for the game"""
+
     best_score = float('-inf')
     move = ()
     for i, row in enumerate(board):
@@ -19,10 +21,12 @@ def best_move(board):
 
 
 def minimax(board, depth, alpha, beta, is_maximizing):
+    """Implements minimax algorythm"""
+
     move_result = check_winner(board)
 
     if move_result is not None:
-        return SCORES[move_result]
+        return SCORES[move_result]  # stop recursive calls if we have a result
 
     if is_maximizing:
         best_score = float('-inf')
@@ -30,10 +34,10 @@ def minimax(board, depth, alpha, beta, is_maximizing):
             for j, element in enumerate(row):
                 if element == ' ':
                     board[i][j] = AI
-                    score = minimax(board, depth + 1, alpha, beta, False)
+                    score = minimax(board, depth + 1, alpha, beta, False)  # call minimax recursively
                     board[i][j] = ' '
                     best_score = max(score, best_score)
-                    alpha = max(alpha, score)
+                    alpha = max(alpha, score)  # using alpha beta pruning to optimize algorythm
                     if beta <= alpha:
                         break
         return best_score
@@ -43,10 +47,10 @@ def minimax(board, depth, alpha, beta, is_maximizing):
             for j, element in enumerate(row):
                 if element == ' ':
                     board[i][j] = HUMAN
-                    score = minimax(board, depth + 1, alpha, beta, True)
+                    score = minimax(board, depth + 1, alpha, beta, True)  # call minimax recursively
                     board[i][j] = ' '
                     best_score = min(score, best_score)
-                    beta = min(beta, score)
+                    beta = min(beta, score)  # using alpha beta pruning to optimize algorythm
                     if beta <= alpha:
                         break
         return best_score
