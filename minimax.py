@@ -2,7 +2,23 @@ from constants import SCORES, AI, HUMAN
 from helpers import check_winner
 
 
-def minimax(board, depth, is_maximizing):
+def best_move(board):
+    best_score = float('-inf')
+    move = ()
+    for i in range(3):
+        for j in range(3):
+            if board[i][j] == ' ':
+                board[i][j] = AI
+                score = minimax(board, 0, float('-inf'), float('inf'), False)
+                board[i][j] = ' '
+                if score > best_score:
+                    best_score = score
+                    move = (i, j)
+
+    board[move[0]][move[1]] = AI
+
+
+def minimax(board, depth, alpha, beta, is_maximizing):
     move_result = check_winner(board)
 
     if move_result is not None:
@@ -14,9 +30,12 @@ def minimax(board, depth, is_maximizing):
             for j in range(3):
                 if board[i][j] == ' ':
                     board[i][j] = AI
-                    score = minimax(board, depth + 1, False)
+                    score = minimax(board, depth + 1, alpha, beta, False)
                     board[i][j] = ' '
                     best_score = max(score, best_score)
+                    alpha = max(alpha, score)
+                    if beta <= alpha:
+                        break
         return best_score
     else:
         best_score = float('inf')
@@ -24,7 +43,10 @@ def minimax(board, depth, is_maximizing):
             for j in range(3):
                 if board[i][j] == ' ':
                     board[i][j] = HUMAN
-                    score = minimax(board, depth + 1, True)
+                    score = minimax(board, depth + 1, alpha, beta, True)
                     board[i][j] = ' '
                     best_score = min(score, best_score)
+                    beta = min(beta, score)
+                    if beta <= alpha:
+                        break
         return best_score

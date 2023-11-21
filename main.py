@@ -1,7 +1,7 @@
 # AI powered tic-tac-toe game
 import os
 
-from minimax import minimax
+from minimax import best_move
 from constants import AI, board_array
 from helpers import check_winner
 
@@ -34,22 +34,6 @@ def insert_value(spots: list, index: tuple[int]):
         spots[index[0] - 1][index[1] - 1] = 'X' if player(spots) == 1 else 'O'
     else:
         print('try again\n')
-
-
-def best_move(board):
-    best_score = float('-inf')
-    move = ()
-    for i in range(3):
-        for j in range(3):
-            if board[i][j] == ' ':
-                board[i][j] = AI
-                score = minimax(board, 0, False)
-                board[i][j] = ' '
-                if score > best_score:
-                    best_score = score
-                    move = (i, j)
-
-    board[move[0]][move[1]] = AI
 
 
 def start_game():
