@@ -5,9 +5,9 @@ from helpers import check_winner
 def best_move(board):
     best_score = float('-inf')
     move = ()
-    for i in range(3):
-        for j in range(3):
-            if board[i][j] == ' ':
+    for i, row in enumerate(board):
+        for j, element in enumerate(row):
+            if element == ' ':
                 board[i][j] = AI
                 score = minimax(board, 0, float('-inf'), float('inf'), False)
                 board[i][j] = ' '
@@ -26,9 +26,9 @@ def minimax(board, depth, alpha, beta, is_maximizing):
 
     if is_maximizing:
         best_score = float('-inf')
-        for i in range(3):
-            for j in range(3):
-                if board[i][j] == ' ':
+        for i, row in enumerate(board):
+            for j, element in enumerate(row):
+                if element == ' ':
                     board[i][j] = AI
                     score = minimax(board, depth + 1, alpha, beta, False)
                     board[i][j] = ' '
@@ -39,9 +39,9 @@ def minimax(board, depth, alpha, beta, is_maximizing):
         return best_score
     else:
         best_score = float('inf')
-        for i in range(3):
-            for j in range(3):
-                if board[i][j] == ' ':
+        for i, row in enumerate(board):
+            for j, element in enumerate(row):
+                if element == ' ':
                     board[i][j] = HUMAN
                     score = minimax(board, depth + 1, alpha, beta, True)
                     board[i][j] = ' '
