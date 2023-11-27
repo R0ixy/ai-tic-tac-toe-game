@@ -21,7 +21,7 @@ def best_move(board):
 
 
 def minimax(board, depth, alpha, beta, is_maximizing):
-    """Implements minimax algorythm"""
+    """Implements minimax algorithm"""
 
     move_result = check_winner(board)
 
@@ -37,7 +37,7 @@ def minimax(board, depth, alpha, beta, is_maximizing):
                     score = minimax(board, depth + 1, alpha, beta, False)  # call minimax recursively
                     board[i][j] = ' '
                     best_score = max(score, best_score)
-                    alpha = max(alpha, score)  # using alpha beta pruning to optimize algorythm
+                    alpha = max(alpha, score)  # using alpha beta pruning to optimize algorithm
                     if beta <= alpha:
                         break
         return best_score
@@ -50,7 +50,7 @@ def minimax(board, depth, alpha, beta, is_maximizing):
                     score = minimax(board, depth + 1, alpha, beta, True)  # call minimax recursively
                     board[i][j] = ' '
                     best_score = min(score, best_score)
-                    beta = min(beta, score)  # using alpha beta pruning to optimize algorythm
+                    beta = min(beta, score)  # using alpha beta pruning to optimize algorithm
                     if beta <= alpha:
                         break
         return best_score
